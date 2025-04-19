@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import { getAllNotes, deleteNote } from '../Api';
+import { getAllNotes, deleteNote } from '../api';
 
 const NoteList = () => {
     const [note, setNote] = useState([]);

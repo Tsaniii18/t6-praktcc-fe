@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { saveNote } from '../Api';
+import { saveNote } from '../api';
 
 const AddNote = () => {
     const [judul, setJudul] = useState("");

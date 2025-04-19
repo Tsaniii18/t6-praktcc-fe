@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { getNoteById, updateNote } from '../Api';
+import { getNoteById, updateNote } from '../api';
 
 const EditNote = () => {
     const [judul, setJudul] = useState("");
