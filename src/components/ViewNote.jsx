@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import { getNoteById } from './api.js';
+import { getNoteById } from '../Api';
 
 const ViewNote = () => {
     const { id } = useParams();
