@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { saveNote } from './api'; // Import dari file api.js
 
 const AddNote = () => {
     const [judul, setJudul] = useState("");
     const [isi, setIsi] = useState("");
     const navigate = useNavigate();
 
-    const saveNote = async (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://backend115-722144796089.us-central1.run.app/note', { judul, isi });
+            await saveNote({ judul, isi });
             navigate("/");
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <div className="container mt-5">
             <div className="box p-5">
                 <h1 className="title">Buat Catatan Baru</h1>
-                <form onSubmit={saveNote}>
+                <form onSubmit={handleSave}>
                     <div className="field">
                         <label className="label">Judul Catatan</label>
                         <div className="control">
@@ -53,6 +53,6 @@ const AddNote = () => {
             </div>
         </div>
     );
-}
+};
 
 export default AddNote;

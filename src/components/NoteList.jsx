@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { getAllNotes, deleteNote } from './api';
 
 const NoteList = () => {
     const [note, setNote] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getNote();
+        fetchNotes();
     }, []);
 
-    const getNote = async () => {
+    const fetchNotes = async () => {
         try {
-            const response = await axios.get('https://backend115-722144796089.us-central1.run.app/note');
+            const response = await getAllNotes();
             setNote(response.data);
         } catch (error) {
             console.log(error);
         } finally {
             setLoading(false);
         }
-    }
+    };
 
-    const deleteNote = async (id) => {
+    const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://backend115-722144796089.us-central1.run.app/note/${id}`);
-            getNote();
+            await deleteNote(id);
+            fetchNotes();
         } catch (error) {
             console.log(error);
-        } 
-    }
+        }
+    };
 
     if (loading) {
         return <div className="container mt-5"><p>Loading...</p></div>;
@@ -39,9 +39,7 @@ const NoteList = () => {
             <div className="box">
                 <h1 className="title has-text-centered">Daftar Catatan</h1>
                 <div className="buttons is-right">
-                    <Link to={`add`} className='button is-success'>
-                        <span>+ Buat Catatan Baru</span>
-                    </Link>
+                    <Link to={`add`} className='button is-success'>+ Buat Catatan Baru</Link>
                 </div>
                 <table className='table is-striped is-fullwidth'>
                     <thead>
@@ -64,15 +62,9 @@ const NoteList = () => {
                                 <td>{note.tanggal_diupdate}</td>
                                 <td>
                                     <div className="buttons">
-                                        <Link to={`view/${note.id}`} className='button is-small is-primary'>
-                                            Lihat
-                                        </Link>
-                                        <Link to={`edit/${note.id}`} className='button is-small is-info'>
-                                            Edit
-                                        </Link>
-                                        <button onClick={() => deleteNote(note.id)} className='button is-small is-danger'>
-                                            Hapus
-                                        </button>
+                                        <Link to={`view/${note.id}`} className='button is-small is-primary'>Lihat</Link>
+                                        <Link to={`edit/${note.id}`} className='button is-small is-info'>Edit</Link>
+                                        <button onClick={() => handleDelete(note.id)} className='button is-small is-danger'>Hapus</button>
                                     </div>
                                 </td>
                             </tr>
@@ -81,7 +73,7 @@ const NoteList = () => {
                 </table>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default NoteList;
