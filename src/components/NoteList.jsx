@@ -37,9 +37,9 @@ const NoteList = () => {
     return (
         <div className="container mt-5">
             <div className="box">
-                <h1 className="title has-text-centered">Daftar Catatan</h1>
+                <h1 className="title has-text-centered">Catatan Saya</h1>
                 <div className="buttons is-right">
-                    <Link to={`add`} className='button is-success'>+ Buat Catatan Baru</Link>
+                    <Link to="add" className='button is-success'>+ Buat Catatan Baru</Link>
                 </div>
                 <table className='table is-striped is-fullwidth'>
                     <thead>
@@ -57,7 +57,7 @@ const NoteList = () => {
                             <tr key={note.id}>
                                 <td>{index + 1}</td>
                                 <td><strong>{note.judul}</strong></td>
-                                <td>{note.isi.substring(0, 50)}...</td>
+                                <td>{note.isi.length > 50 ? `${note.isi.substring(0, 50)}...` : note.isi}</td>
                                 <td>{note.tanggal_dibuat}</td>
                                 <td>{note.tanggal_diupdate}</td>
                                 <td>

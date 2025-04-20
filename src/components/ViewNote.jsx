@@ -22,37 +22,16 @@ const ViewNote = () => {
         fetchNote();
     }, [id]);
 
-    const truncateContent = (text, maxWords = 200) => {
-        const words = text.trim().split(/\s+/);
-        if (words.length <= maxWords) return text;
-        return words.slice(0, maxWords).join(' ') + '...';
-    };
-
     if (loading) return <div className="container mt-5"><p>Loading...</p></div>;
     if (!note) return <div className="container mt-5"><p>Catatan tidak ditemukan</p></div>;
 
     return (
         <div className="container mt-5">
             <div className="box p-5">
-                <h1 className="title mb-4">{note.judul}</h1>
-
-                <table className="table is-striped is-fullwidth">
-                    <tbody>
-                        <tr>
-                            <th>Isi Catatan</th>
-                            <td>{truncateContent(note.isi)}</td>
-                        </tr>
-                        <tr>
-                            <th>Dibuat</th>
-                            <td>{note.tanggal_dibuat}</td>
-                        </tr>
-                        <tr>
-                            <th>Terakhir Diupdate</th>
-                            <td>{note.tanggal_diupdate}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <h1 className="title">{note.judul}</h1>
+                <p className="content">{note.isi}</p>
+                <p><strong>Dibuat:</strong> {note.tanggal_dibuat}</p>
+                <p><strong>Terakhir diupdate:</strong> {note.tanggal_diupdate}</p>
                 <div className="buttons mt-4">
                     <button className="button is-link" onClick={() => navigate("/")}>Kembali</button>
                 </div>
